@@ -2,6 +2,9 @@ package com.taro.tusk.closet.type;
 
 /**
  * Created by Michelle Xiong on 05/08/2015.
+ * Object Outerwear
+ *
+ * Use for any type of outerwear
  */
 public class  Outerwear implements ArticleType {
     private boolean isEnabled;

@@ -2,6 +2,9 @@ package com.taro.tusk.closet.type;
 
 /**
  * Created by Michelle Xiong on 05/08/2015.
+ * Object Bottom
+ *
+ * Use for any type of bottom
  */
 public class  Bottom implements ArticleType {
     private boolean isEnabled;

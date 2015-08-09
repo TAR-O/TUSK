@@ -2,6 +2,9 @@ package com.taro.tusk.closet.type;
 
 /**
  * Created by Michelle Xiong on 05/08/2015.
+ * Object Top
+ *
+ * Use for any type of top
  */
 public class Top implements ArticleType {
     private boolean isEnabled;
