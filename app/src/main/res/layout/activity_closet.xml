@@ -7,79 +7,94 @@
     android:weightSum="3"
     tools:context="com.taro.tusk.Closet">
 
-    <!--Button
+    <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/home_activity"
-        android:onClick="toDifferentActivity"/-->
+        android:onClick="toDifferentActivity"/>
 
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:rowCount="1"
-        android:columnCount="2">
-        <TableRow
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/top"/>
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <Button
-                style="@style/button_half_boxes"
-                android:text="tShirt"
-                android:id="@+id/t_shirt"
-                />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <Button
-                style="@style/button_half_boxes"
-                android:text="Skirt"
-                android:id="@+id/skirt"
-                />
+            <RelativeLayout
+                style="@style/closet_article_layout"
+                android:id="@+id/t_shirt">
+                <Button
+                    style="@style/closet_article_buttons"
+                    android:text="@string/t_shirt"
+                    android:onClick="tempMethod"/>
+                <CheckBox
+                    style="@style/enabled_buttons"/>
+                <CheckBox
+                    style="@style/notified_buttons"/>
+            </RelativeLayout>
 
-        </TableRow>
+            <RelativeLayout
+                style="@style/closet_article_layout"
+                android:id="@+id/tank">
+                <Button
+                    style="@style/closet_article_buttons"
+                    android:text="@string/tank"
+                    android:onClick="tempMethod"/>
+                <CheckBox
+                    style="@style/enabled_buttons"/>
+                <CheckBox
+                    style="@style/notified_buttons"/>
+            </RelativeLayout>
 
-        <!--TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+        </LinearLayout>
+    </HorizontalScrollView>
 
-            <ToggleButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New ToggleButton"
-                android:id="@+id/toggleButton"
-                android:layout_column="2" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New CheckBox"
-                android:id="@+id/checkBox"
-                android:layout_column="2" />
-        </TableRow-->
-
-
-    </TableLayout>
-
-
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/enabled"
-        android:text="E"
-        android:onClick="changeEnabled"
-        android:padding="0dp"/>
-    <Button
+        android:text="@string/bottom"/>
+    <HorizontalScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/notified"
-        android:text="N"
-        android:onClick="changeNotified"
-        android:padding="0dp"/>
+        android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <RelativeLayout
+                style="@style/closet_article_layout"
+                android:id="@+id/shorts">
+                <Button
+                    style="@style/closet_article_buttons"
+                    android:text="@string/shorts"
+                    android:onClick="tempMethod"/>
+                <CheckBox
+                    style="@style/enabled_buttons"/>
+                <CheckBox
+                    style="@style/notified_buttons"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/closet_article_layout"
+                android:id="@+id/skirt">
+                <Button
+                    style="@style/closet_article_buttons"
+                    android:text="@string/skirt"
+                    android:onClick="tempMethod"/>
+                <CheckBox
+                    style="@style/enabled_buttons"/>
+                <CheckBox
+                    style="@style/notified_buttons"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
 
 </LinearLayout>
