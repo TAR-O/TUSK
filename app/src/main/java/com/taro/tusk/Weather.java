@@ -19,12 +19,17 @@ import org.json.JSONObject;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ListAdapter;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 
 public class Weather extends ActionBarActivity {
 
     private TextView text1;
+    private TextView text2;
+
+
     // Progress Dialog
     private ProgressDialog pDialog;
 
@@ -34,7 +39,7 @@ public class Weather extends ActionBarActivity {
     ArrayList<HashMap<String, String>> dataList;
 
     // url to get all products list
-    private static String url_all_data = "http://localhost/get_Data.php";
+    private static String url_all_data = "http://tusk.website/get_data.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
@@ -132,6 +137,7 @@ public class Weather extends ActionBarActivity {
             JSONObject json = jParser.makeHttpRequest(url_all_data, "GET", params);
 
             // Check your log cat for JSON reponse
+
             Log.d("All DATA: ", json.toString());
 
             try {
@@ -160,9 +166,9 @@ public class Weather extends ActionBarActivity {
 
                         // adding HashList to ArrayList
                         dataList.add(map);
+
                     }
                 } else {
-
 
                     // no products found
                     // Launch Add New product Activity
@@ -193,18 +199,27 @@ public class Weather extends ActionBarActivity {
                     /**
                      * Updating parsed JSON data into ListView
                      * */
-                    /*
-                    ListAdapter adapter = new SimpleAdapter(
-                            Weather.this, dataList,
-                            R.layout.list_item, new String[] { TAG_CITY,
-                            TAG_NAME},
-                            new int[] { R.id.city, R.id.name });
-                    // updating listview
-                    setListAdapter(adapter);
-                    */
-                    text1 = (TextView) findViewById(R.id.text1);
 
-                    text1.setText("hi");
+                    /*ListAdapter adapter = new SimpleAdapter(
+                            Weather.this, dataList,
+                            R.layout.list_item, new String[]{TAG_CITY,
+                            TAG_NAME},
+                            new int[]{R.id.city, R.id.name});
+                    // updating listview
+                    setListAdapter(adapter);*/
+
+
+                    HashMap<String, String> map = new HashMap<String,String>();
+                    text1 = (TextView) findViewById(R.id.text1);
+                    //map = dataList.get(1);
+                    //text1.setText(map.get("name"));
+                    String num = Integer.toString(dataList.size());
+                    text1.setText(num);
+
+                    if (num > 0){
+                        map = dataList.get(1);
+                        text1.setText(map.get("name"));
+                    }
                 }
             });
 
