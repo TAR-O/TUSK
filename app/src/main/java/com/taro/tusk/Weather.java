@@ -45,7 +45,22 @@ public class Weather extends ActionBarActivity {
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_DATA = "data";
     private static final String TAG_CITY = "city";
-    private static final String TAG_NAME = "name";
+    private static final String TAG_TEMP = "temp";
+    
+    private static final String TAG_APPARANTTEMP = "apparantTemp";
+    private static final String TAG_SUMMARY = "summary";
+    private static final String TAG_ICON = "icon";
+    private static final String TAG_TIME = "time";
+    private static final String TAG_PRESSURE = "pressure";
+    private static final String TAG_DEWPOINT = "dewPoint";
+    private static final String TAG_HUMIDITY = "humidity";
+    private static final String TAG_WINDSPEED = "windSpeed";
+    private static final String TAG_WINDBEARING = "windBearing";
+    private static final String TAG_PRECIPTYPE = "precipType";
+    private static final String TAG_PRECIPPROB = "precipProb";
+    private static final String TAG_CLOUDCOVER = "cloudCover";
+
+
 
     // products JSONArray
     JSONArray data = null;
@@ -55,39 +70,11 @@ public class Weather extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
 
-
         // Hashmap for ListView
         dataList = new ArrayList<HashMap<String, String>>();
 
         // Loading products in Background Thread
         new LoadAllData().execute();
-
-        // Get listview
-        //ListView lv = getListView();
-
-        // on seleting single product
-        // launching Edit Product Screen
-        /*
-        lv.setOnItemClickListener(new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                // getting values from selected ListItem
-                String pid = ((TextView) view.findViewById(R.id.city)).getText()
-                        .toString();
-
-                // Starting new intent
-                Intent in = new Intent(getApplicationContext(),
-                        EditProductActivity.class);
-                // sending pid to next activity
-                in.putExtra(TAG_CITY, pid);
-
-                // starting new activity and expecting some response back
-                startActivityForResult(in, 100);
-            }
-        });
-        */
 
     }
 
@@ -145,24 +132,32 @@ public class Weather extends ActionBarActivity {
                 int success = json.getInt(TAG_SUCCESS);
 
                 if (success == 1) {
-                    // products found
-                    // Getting Array of Products
+                    // data found
+                    // Getting Array of data
                     data = json.getJSONArray(TAG_DATA);
 
-                    // looping through All Products
+                    // looping through All data
                     for (int i = 0; i < data.length(); i++) {
                         JSONObject c = data.getJSONObject(i);
 
-                        // Storing each json item in variable
-                        String city = c.getString(TAG_CITY);
-                        String name = c.getString(TAG_NAME);
-
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<String,String>();
-
+                        
                         // adding each child node to HashMap key => value
-                        map.put(TAG_CITY, city);
-                        map.put(TAG_NAME, name);
+                        map.put(TAG_CITY, c.optString(TAG_CITY));
+                        map.put(TAG_TEMP, c.optString(TAG_TEMP);
+                        map.put(TAG_APPARANTTEMP, c.optString(TAG_APPARANTTEMP);
+                        map.put(TAG_SUMMARY, c.optString(TAG_SUMMARY);
+                        map.put(TAG_ICON, c.optString(TAG_ICON);
+                        map.put(TAG_TIME, c.optString(TAG_TIME);
+                        map.put(TAG_PRESSURE, c.optString(TAG_PRESSURE);
+                        map.put(TAG_DEWPOINT, c.optString(TAG_DEWPOINT);
+                        map.put(TAG_HUMIDITY, c.optString(TAG_HUMIDITY);
+                        map.put(TAG_WINDSPEED, c.optString(TAG_WINDSPEED);
+                        map.put(TAG_WINDBEARING, c.optString(TAG_WINDBEARING);
+                        map.put(TAG_PRECIPTYPE, c.optString(TAG_PRECIPTYPE);
+                        map.put(TAG_PRECIPPROB, c.optString(TAG_PRECIPPROB);
+                        map.put(TAG_CLOUDCOVER, c.optString(TAG_CLOUDCOVER);
 
                         // adding HashList to ArrayList
                         dataList.add(map);
@@ -170,7 +165,7 @@ public class Weather extends ActionBarActivity {
                     }
                 } else {
 
-                    // no products found
+                    // no data found
                     // Launch Add New product Activity
                     /*
                     Intent i = new Intent(getApplicationContext(),
@@ -197,18 +192,8 @@ public class Weather extends ActionBarActivity {
             runOnUiThread(new Runnable() {
                 public void run() {
                     /**
-                     * Updating parsed JSON data into ListView
+                     * Updating parsed JSON data to textviews
                      * */
-
-                    /*ListAdapter adapter = new SimpleAdapter(
-                            Weather.this, dataList,
-                            R.layout.list_item, new String[]{TAG_CITY,
-                            TAG_NAME},
-                            new int[]{R.id.city, R.id.name});
-                    // updating listview
-                    setListAdapter(adapter);*/
-
-
                     HashMap<String, String> map = new HashMap<String,String>();
                     text1 = (TextView) findViewById(R.id.text1);
                     int sizeNum = dataList.size();
