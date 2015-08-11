@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">TUSK</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
     <string name="home_activity">Home (Main)</string>
@@ -10,5 +9,21 @@
     <string name="title_activity_closet">Closet</string>
     <string name="title_activity_weather">Weather</string>
 
-    <string name="is_enabled">isEnabled</string>
+    <string name="top">Top</string>
+    <string name="bottom">Bottom</string>
+    <string name="outerwear">Outerwear</string>
+    <string name="shoes">Shoes</string>
+    <string name="other">Other</string>
+
+    <string name="t_shirt">T-Shirt</string>
+    <string name="skirt">Skirt</string>
+    <string name="shorts">Shorts</string>
+    <string name="tank">Tank</string>
+    <string name="sweater">Sweater</string>
+    <string name="raincoat">Raincoat</string>
+    <string name="boots">Boots</string>
+    <string name="sandals">Sandals</string>
+    <string name="sneakers">Sneakers</string>
+    <string name="umbrella">Umbrella</string>
+
 </resources>

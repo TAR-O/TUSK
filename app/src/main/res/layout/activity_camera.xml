@@ -4,20 +4,12 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="20dp"
-
     tools:context="com.taro.tusk.Camera">
 
-    <!--LinearLayout
+    <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"-->
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/home_activity"
-            android:onClick="toDifferentActivity"/>
-
-    <!--/LinearLayout-->
+        android:text="@string/home_activity"
+        android:onClick="toDifferentActivity"/>
 
 </LinearLayout>

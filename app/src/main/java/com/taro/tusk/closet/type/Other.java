@@ -1,16 +1,13 @@
 package com.taro.tusk.closet.type;
 
 /**
- * Created by Michelle Xiong on 05/08/2015.
- * Object Bottom
- *
- * Use for any type of bottom
+ * Created by Michelle Xiong on 10/08/2015.
  */
-public class  Bottom implements ArticleType {
+public class Other implements ArticleType {
     private boolean isEnabled;
     private boolean isNotified;
 
-    public Bottom ( boolean isEnabled, boolean isNotified){
+    public Other ( boolean isEnabled, boolean isNotified){
         this.isEnabled=isEnabled;
         this.isNotified=isNotified;
         enabledEffectsNotified();

@@ -24,10 +24,6 @@ public class Camera extends ActionBarActivity {
         return true;
     }
 
-    public void backHomeActivity (View v){
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-    }
-
     public void toDifferentActivity (View v){
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }

@@ -11,10 +11,33 @@
         <item name="android:layout_weight">1</item>
     </style>
 
-    <style name="button_third_boxes">
-        <item name="android:layout_width">0dp</item>
+    <style name="closet_article_layout">
+        <item name="android:layout_width">180dp</item>
         <item name="android:layout_height">120dp</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="closet_article_buttons">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">50dp</item>
+    </style>
+
+    <style name="enabled_buttons">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <!--item name="android:onClick">changedEnabled</item-->
+        <item name="android:layout_alignParentRight">true</item>
+        <!--item name="android:layout_alignParentEnd">true</item-->
+        <item name="android:text">E</item>
+    </style>
+    <style name="notified_buttons">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <!--item name="android:onClick">changedEnabled</item-->
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <!--item name="android:layout_alignParentEnd">true</item-->
+        <item name="android:text">N</item>
     </style>
 </resources>
