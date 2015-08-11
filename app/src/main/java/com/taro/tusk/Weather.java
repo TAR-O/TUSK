@@ -211,12 +211,11 @@ public class Weather extends ActionBarActivity {
 
                     HashMap<String, String> map = new HashMap<String,String>();
                     text1 = (TextView) findViewById(R.id.text1);
-                    //map = dataList.get(1);
-                    //text1.setText(map.get("name"));
+                    int sizeNum = dataList.size();
                     String num = Integer.toString(dataList.size());
                     text1.setText(num);
 
-                    if (num > 0){
+                    if (sizeNum > 0){
                         map = dataList.get(1);
                         text1.setText(map.get("name"));
                     }
