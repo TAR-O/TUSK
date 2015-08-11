@@ -90,7 +90,19 @@ public class Closet extends ActionBarActivity {
                 break;
             case R.id.shorts: findID = OpenCloset.shorts;
                 break;
-            default: findID = OpenCloset.skirt; //change this to what?
+            case R.id.sweater: findID = OpenCloset.sweater;
+                break;
+            case R.id.raincoat: findID = OpenCloset.raincoat;
+                break;
+            case R.id.boots: findID = OpenCloset.boots;
+                break;
+            case R.id.sandals: findID = OpenCloset.sandals;
+                break;
+            case R.id.sneakers: findID = OpenCloset.sneakers;
+                break;
+            case R.id.umbrella: findID = OpenCloset.umbrella;
+                break;
+            default: findID = OpenCloset.tShirt; //change this to what?
                 break;
         }
         return findID;

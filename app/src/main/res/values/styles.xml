@@ -26,7 +26,7 @@
     <style name="enabled_buttons">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:onClick">changedEnabled</item>
+        <!--item name="android:onClick">changedEnabled</item-->
         <item name="android:layout_alignParentRight">true</item>
         <!--item name="android:layout_alignParentEnd">true</item-->
         <item name="android:text">E</item>
@@ -34,7 +34,7 @@
     <style name="notified_buttons">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:onClick">changedEnabled</item>
+        <!--item name="android:onClick">changedEnabled</item-->
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_alignParentBottom">true</item>
         <!--item name="android:layout_alignParentEnd">true</item-->
