@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -118,14 +119,21 @@ public class Weather extends ActionBarActivity {
          * getting All products from url
          * */
         protected String doInBackground(String... args) {
-            // Building Parameters
+
             List<NameValuePair> params = new ArrayList<NameValuePair>();
+
+            params.add(new BasicNameValuePair("city", "Toronto"));
+
+            // getting product details by making HTTP request
+            // Note that product details url will use GET request
+
+
             // getting JSON string from URL
             JSONObject json = jParser.makeHttpRequest(url_all_data, "GET", params);
 
             // Check your log cat for JSON reponse
 
-            Log.d("All DATA: ", json.toString());
+           // Log.d("All DATA: ", json.toString());
 
             try {
                 // Checking for SUCCESS TAG
@@ -145,19 +153,19 @@ public class Weather extends ActionBarActivity {
                         
                         // adding each child node to HashMap key => value
                         map.put(TAG_CITY, c.optString(TAG_CITY));
-                        map.put(TAG_TEMP, c.optString(TAG_TEMP);
-                        map.put(TAG_APPARANTTEMP, c.optString(TAG_APPARANTTEMP);
-                        map.put(TAG_SUMMARY, c.optString(TAG_SUMMARY);
-                        map.put(TAG_ICON, c.optString(TAG_ICON);
-                        map.put(TAG_TIME, c.optString(TAG_TIME);
-                        map.put(TAG_PRESSURE, c.optString(TAG_PRESSURE);
-                        map.put(TAG_DEWPOINT, c.optString(TAG_DEWPOINT);
-                        map.put(TAG_HUMIDITY, c.optString(TAG_HUMIDITY);
-                        map.put(TAG_WINDSPEED, c.optString(TAG_WINDSPEED);
-                        map.put(TAG_WINDBEARING, c.optString(TAG_WINDBEARING);
-                        map.put(TAG_PRECIPTYPE, c.optString(TAG_PRECIPTYPE);
-                        map.put(TAG_PRECIPPROB, c.optString(TAG_PRECIPPROB);
-                        map.put(TAG_CLOUDCOVER, c.optString(TAG_CLOUDCOVER);
+                        map.put(TAG_TEMP, c.optString(TAG_TEMP));
+                        map.put(TAG_APPARANTTEMP, c.optString(TAG_APPARANTTEMP));
+                        map.put(TAG_SUMMARY, c.optString(TAG_SUMMARY));
+                        map.put(TAG_ICON, c.optString(TAG_ICON));
+                        map.put(TAG_TIME, c.optString(TAG_TIME));
+                        map.put(TAG_PRESSURE, c.optString(TAG_PRESSURE));
+                        map.put(TAG_DEWPOINT, c.optString(TAG_DEWPOINT));
+                        map.put(TAG_HUMIDITY, c.optString(TAG_HUMIDITY));
+                        map.put(TAG_WINDSPEED, c.optString(TAG_WINDSPEED));
+                        map.put(TAG_WINDBEARING, c.optString(TAG_WINDBEARING));
+                        map.put(TAG_PRECIPTYPE, c.optString(TAG_PRECIPTYPE));
+                        map.put(TAG_PRECIPPROB, c.optString(TAG_PRECIPPROB));
+                        map.put(TAG_CLOUDCOVER, c.optString(TAG_CLOUDCOVER));
 
                         // adding HashList to ArrayList
                         dataList.add(map);
@@ -196,13 +204,15 @@ public class Weather extends ActionBarActivity {
                      * */
                     HashMap<String, String> map = new HashMap<String,String>();
                     text1 = (TextView) findViewById(R.id.text1);
+                    text2 = (TextView) findViewById(R.id.text2);
                     int sizeNum = dataList.size();
                     String num = Integer.toString(dataList.size());
                     text1.setText(num);
 
                     if (sizeNum > 0){
-                        map = dataList.get(1);
-                        text1.setText(map.get("name"));
+                        map = dataList.get(0);
+                        text1.setText(map.get(TAG_CITY));
+                        text2.setText(map.get(TAG_TEMP));
                     }
                 }
             });
