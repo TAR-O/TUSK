@@ -28,6 +28,10 @@
             android:name="com.taro.tusk.Weather"
             android:label="@string/title_activity_weather" >
         </activity>
+        <activity
+            android:name="com.taro.tusk.settings"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
     <!--  Internet Permissions -->

@@ -6,8 +6,6 @@ import android.os.AsyncTask;
 import android.os.SystemClock;
 import android.util.Log;
 
-import com.taro.tusk.JSONParser2;
-
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -23,12 +21,10 @@ import java.util.List;
 /**
  * Created by Tina on 15-08-14.
  */
-//public class webConn extends {
+
   public  class webConn extends AsyncTask<String, String, String> {
 
     public AsyncResponse delegate=null;
-
-
 
     // Progress Dialog
     private ProgressDialog pDialog;
@@ -61,16 +57,16 @@ import java.util.List;
     private static final String TAG_CLOUDCOVER = "cloudCover";
 
     private Context context;
-
+    private String locRec;
 
     // products JSONArray
     JSONArray data = null;
 
 
-    public webConn (Context cxt){
+    public webConn (Context cxt, String loc){
         // Hashmap for ListView
         dataList = new ArrayList<HashMap<String, String>>();
-
+        locRec = loc;
         context = cxt;
         // Loading products in Background Thread
         this.execute();
@@ -96,12 +92,15 @@ import java.util.List;
 
             List<NameValuePair> params = new ArrayList<NameValuePair>();
 
-            params.add(new BasicNameValuePair("city", "Toronto"));
+            if(locRec == null){
+                locRec = "Toronto";
+                params.add(new BasicNameValuePair("city", locRec));
+            }else {
+                params.add(new BasicNameValuePair("city", locRec));
+            }
 
             // getting product details by making HTTP request
-            // Note that product details url will use GET request
-
-
+            // Note that data details url will use GET request
             // getting JSON string from URL
             JSONObject json = jParser.makeHttpRequest(url_all_data, "GET", params);
 
@@ -143,12 +142,9 @@ import java.util.List;
 
                         // adding HashList to ArrayList
                         dataList.add(map);
-
                     }
                 } else {
-
                     // no data found
-
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -157,18 +153,14 @@ import java.util.List;
             return null;
         }
 
-
-
         /**
          * After completing background task Dismiss the progress dialog
          * **/
        // @Override
         protected void onPostExecute(String result) {
+
             // dismiss the dialog after getting all products
             pDialog.dismiss();
-
-            //result = dataList;
-            //dataArray(dataList);
             delegate.processFinish(dataList);
         }
 

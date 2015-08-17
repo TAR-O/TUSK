@@ -20,6 +20,7 @@ public class Weather extends ActionBarActivity implements AsyncResponse{
     private TextView text1;
     private TextView text2;
     private Menu mymenu;
+    private String locResult;
 
     ArrayList<HashMap<String, String>> dataList;
     //webConn asyncTask =new webConn(Weather.this);
@@ -32,7 +33,7 @@ public class Weather extends ActionBarActivity implements AsyncResponse{
         // Hashmap for ListView
         dataList = new ArrayList<HashMap<String, String>>();
 
-        webConn asyncTask = new webConn(Weather.this);
+        webConn asyncTask = new webConn(Weather.this, locResult);
         asyncTask.delegate = this;
 
     }
@@ -63,7 +64,6 @@ public class Weather extends ActionBarActivity implements AsyncResponse{
     }
 
 
-
     public void toDifferentActivity (View v){
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
@@ -84,20 +84,44 @@ public class Weather extends ActionBarActivity implements AsyncResponse{
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+       // if (id == R.id.action_settings) {
+         //   return true;
+        //}
 
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.action_refresh:
                 finish();
                 startActivity(getIntent());
                 return true;
+            case R.id.action_settings:
+                Intent intent = new Intent(this, settings.class);
+               // startActivity(intent);
+
+                startActivityForResult(intent, 1);
+                return true;
+
+
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                locResult=data.getStringExtra("result");
+                webConn asyncTask = new webConn(Weather.this, locResult);
+                asyncTask.delegate = this;
+
+            }
+            if (resultCode == RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
     }
 
 
