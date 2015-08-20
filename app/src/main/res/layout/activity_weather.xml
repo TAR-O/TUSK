@@ -18,18 +18,25 @@
             android:text="@string/home_activity"
             android:onClick="toDifferentActivity"/>
 
-        <Button
+      <!--  <Button
             android:id="@+id/btnGetData"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="GetData"
-            android:layout_marginTop="25dip"/>
+            android:layout_marginTop="25dip"/> -->
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/text1"
-            android:text="text"
+            android:text="Select City"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text2"
+            android:text=""
             />
     <!--/LinearLayout-->
 
