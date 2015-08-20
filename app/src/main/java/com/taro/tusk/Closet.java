@@ -1,27 +1,39 @@
 package com.taro.tusk;
 
-import android.content.Context;
-import android.content.Intent;
+
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.Toast;
-import com.taro.tusk.closet.type.ArticleType;
-import com.taro.tusk.closet.OpenCloset;
+import com.taro.tusk.closet.ClosetSQLiteHelper;
+import com.taro.tusk.closet.ClothingArticle;
 
 public class Closet extends ActionBarActivity {
+    ClosetSQLiteHelper db = new ClosetSQLiteHelper(this);
 
-    ArticleType currentArticle;
-    //ArticleType article = OpenCloset.tShirt;
+    /*EditText article;
+    EditText articletype;
+    ClothingArticle clothingA;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_closet);
+
+        db.onUpgrade(db.getWritableDatabase(),2,3);
+
+        db.addArticle(new ClothingArticle("t-shirt","top",1,0));
+        db.addArticle(new ClothingArticle("tank","top",1,0));
+        db.addArticle(new ClothingArticle("shorts","bottom",1,0));
+        db.addArticle(new ClothingArticle("skirt","bottom",0,0));
+
     }
+
+    /*public void addClothingArticle(View v){
+        clothingA = new ClothingArticle(article.getText().toString(),
+                articletype.getText().toString(),1, 1);
+    }*/
 
 
     @Override
@@ -32,65 +44,49 @@ public class Closet extends ActionBarActivity {
     }
 
     public void toDifferentActivity (View v){
-        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        //startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        finish();
     }
 
     public void changeEnabled (View v){
-    ArticleType current = findIDOfArticle(v);
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
+        ClothingArticle current = findClothingArticle(v);
 
-        if(current.getIsEnabled()){
-            current.setIsEnabled(false);
+        if(current.getIsEnabled()==1){
+            current.setIsEnabled(0);
         }else{
-            current.setIsEnabled(true);
+            current.setIsEnabled(1);
         }
-        CharSequence text = current + "isEnabled" + Boolean.toString(current.getIsEnabled());
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+
+        db.updateEnabledNotified(current);
     }
 
     public void changeNotified (View v){
-        ArticleType current = findIDOfArticle(v);
+        ClothingArticle current = findClothingArticle(v);
 
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-
-        if(current.getIsNotified()){
-            current.setIsNotified(false);
+        if(current.getIsNotified()==1){
+            current.setIsNotified(0);
         }else{
-            current.setIsNotified(true);
+            current.setIsNotified(1);
         }
 
-        CharSequence text = current + "isNotified" + Boolean.toString(current.getIsNotified());
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        db.updateEnabledNotified(current);
     }
 
-    public void tempMethod (View v){
-        ArticleType current = findIDOfArticle(v);
+    public ClothingArticle findClothingArticle (View v){
 
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        CharSequence text = "isNotified" + Boolean.toString(current.getIsNotified())+
-                "isEnabled" + Boolean.toString(current.getIsEnabled());
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-    }
+        int idOfCA;
 
-    public ArticleType findIDOfArticle (View v){
-        ArticleType findID;
         // is this how to get id of (parent) layout??
         switch (((View) v.getParent()).getId()){
-            case R.id.t_shirt: findID = OpenCloset.tShirt;
+            case R.id.t_shirt: idOfCA = 1;
                 break;
-            case R.id.skirt: findID = OpenCloset.skirt;
+            case R.id.skirt: idOfCA = 4;
                 break;
-            case R.id.tank: findID = OpenCloset.tank;
+            case R.id.tank: idOfCA = 2;
                 break;
-            case R.id.shorts: findID = OpenCloset.shorts;
+            case R.id.shorts: idOfCA = 3;
                 break;
-            case R.id.sweater: findID = OpenCloset.sweater;
+            /*case R.id.sweater: findID = OpenCloset.sweater;
                 break;
             case R.id.raincoat: findID = OpenCloset.raincoat;
                 break;
@@ -101,11 +97,12 @@ public class Closet extends ActionBarActivity {
             case R.id.sneakers: findID = OpenCloset.sneakers;
                 break;
             case R.id.umbrella: findID = OpenCloset.umbrella;
-                break;
-            default: findID = OpenCloset.tShirt; //change this to what?
+                break;*/
+            default: idOfCA = 1; //change this to what?
                 break;
         }
-        return findID;
+
+        return db.getClothingArticle(idOfCA);
     }
 
 

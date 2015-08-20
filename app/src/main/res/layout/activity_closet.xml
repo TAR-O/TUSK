@@ -13,7 +13,6 @@
         android:weightSum="3"
        >
 
-
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -111,8 +110,9 @@
 
             </LinearLayout>
         </HorizontalScrollView>
-
-        <TextView
+    </LinearLayout> <!--temp-->
+</ScrollView><!--temp-->
+        <!--TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/outerwear"/>
@@ -248,4 +248,5 @@
         </HorizontalScrollView>
 
     </LinearLayout>
-</ScrollView>
+</ScrollView-->
+
