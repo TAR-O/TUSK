@@ -1,78 +1,45 @@
 package com.taro.tusk;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.support.design.widget.TabLayout;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import java.util.ArrayList;
-import java.util.HashMap;
 
-import android.widget.TextView;
+import com.taro.tusk.Tools.WeatherFragmentPagerAdapter;
+import com.taro.tusk.Tools.setLocation;
+import android.support.v7.app.ActionBarActivity;
 
-import com.taro.tusk.Tools.AsyncResponse;
-import com.taro.tusk.Tools.webConn;
+/**
+ * Created by Tina on 15-08-29.
+ */
+public class Weather extends ActionBarActivity {
 
-
-public class Weather extends ActionBarActivity implements AsyncResponse{
-
-    private TextView text1;
-    private TextView text2;
     private Menu mymenu;
-    private String locResult;
-
-    ArrayList<HashMap<String, String>> dataList;
-    //webConn asyncTask =new webConn(Weather.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       // setHasOptionsMenu(true);
         setContentView(R.layout.activity_weather);
 
-        // Hashmap for ListView
-        dataList = new ArrayList<HashMap<String, String>>();
+        // Get the ViewPager and set it's PagerAdapter so that it can display items
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setAdapter(new WeatherFragmentPagerAdapter(getSupportFragmentManager(),
+                Weather.this));
 
-        webConn asyncTask = new webConn(Weather.this, locResult);
-        asyncTask.delegate = this;
+        // Give the TabLayout the ViewPager
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
-    }
-
-
-
-    public void processFinish(ArrayList output){
-        //this you will received result fired from async class of onPostExecute(result) method.
-        dataList = output;
-        runOnUiThread(new Runnable() {
-            public void run() {
-
-                HashMap<String, String> map = new HashMap<String, String>();
-                text1 = (TextView) findViewById(R.id.text1);
-                text2 = (TextView) findViewById(R.id.text2);
-                int sizeNum = dataList.size();
-                String num = Integer.toString(dataList.size());
-                text1.setText(num);
-
-                if (sizeNum > 0) {
-                    map = dataList.get(0);
-                    text1.setText("City: " + map.get("city"));
-                    text2.setText("Temperature: " + map.get("temp"));
-                }
-
-            }
-        });
-    }
-
-
-    public void toDifferentActivity (View v){
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        menu.clear();
         getMenuInflater().inflate(R.menu.menu_weather, menu);
-
         mymenu = menu;
         return true;
     }
@@ -86,43 +53,20 @@ public class Weather extends ActionBarActivity implements AsyncResponse{
         // as you specify a parent activity in AndroidManifest.xml.
 
 
-        //noinspection SimplifiableIfStatement
-       // if (id == R.id.action_settings) {
-         //   return true;
-        //}
-
-        switch (item.getItemId()) {
+       switch (item.getItemId()) {
             case R.id.action_refresh:
                 finish();
                 startActivity(getIntent());
                 return true;
-            case R.id.action_settings:
-                Intent intent = new Intent(this, settings.class);
-               // startActivity(intent);
-
-                startActivityForResult(intent, 1);
+            case R.id.action_setLocation:
+                Intent intent2 = new Intent(this, setLocation.class);
+                startActivity(intent2);
+                //startActivityForResult(intent2, 1);
                 return true;
 
 
         }
+
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (requestCode == 1) {
-            if(resultCode == RESULT_OK){
-                locResult=data.getStringExtra("result");
-                webConn asyncTask = new webConn(Weather.this, locResult);
-                asyncTask.delegate = this;
-
-            }
-            if (resultCode == RESULT_CANCELED) {
-                //Write your code if there's no result
-            }
-        }
-    }
-
-
 }

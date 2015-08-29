@@ -3,12 +3,15 @@
 
     <string name="app_name">TUSK</string>
     <string name="action_settings">Settings</string>
+    <string name="action_setLocation">Set Location</string>
 
     <string name="home_activity">Home (Main)</string>
     <string name="title_activity_camera">Camera</string>
     <string name="title_activity_closet">Closet</string>
     <string name="title_activity_weather">Weather</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_setLocation">Set Location</string>
+    <string name="title_activity_weeklyWeather">Weekly Weather</string>
 
     <string name="top">Top</string>
     <string name="bottom">Bottom</string>
@@ -26,5 +29,10 @@
     <string name="sandals">Sandals</string>
     <string name="sneakers">Sneakers</string>
     <string name="umbrella">Umbrella</string>
+
+    <string name="hello">Hello World, MenuExampleActivity!</string>
+
+    <string name="exitOption">Exit</string>
+    <string name="aboutOption">About</string>
 
 </resources>

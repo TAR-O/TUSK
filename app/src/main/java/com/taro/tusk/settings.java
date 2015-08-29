@@ -14,7 +14,7 @@ import android.widget.Toast;
 /**
  * Created by Tina on 15-08-16.
  */
-
+/*
 public class settings  extends Activity implements OnMenuItemClickListener {
 
     SharedPreferences sharedpreferences;
@@ -74,3 +74,4 @@ public class settings  extends Activity implements OnMenuItemClickListener {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 }
+*/

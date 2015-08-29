@@ -25,13 +25,14 @@
             android:label="@string/title_activity_closet" >
         </activity>
         <activity
-            android:name="com.taro.tusk.Weather"
-            android:label="@string/title_activity_weather" >
+            android:name=".Tools.setLocation"
+            android:label="SetLocation" >
         </activity>
         <activity
-            android:name="com.taro.tusk.settings"
-            android:label="@string/title_activity_settings" >
+            android:name=".Weather"
+            android:label="Weather" >
         </activity>
+
     </application>
 
     <!--  Internet Permissions -->
