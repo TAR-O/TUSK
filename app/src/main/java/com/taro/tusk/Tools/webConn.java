@@ -3,8 +3,10 @@ package com.taro.tusk.Tools;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 
@@ -50,8 +52,6 @@ import java.util.List;
     private static final String TAG_CITY = "city";
     private static final String TAG_TEMP = "temp";
 
-
-
     private Context context;
     private String locRec;
     private String dataType;
@@ -60,10 +60,10 @@ import java.util.List;
     JSONArray data = null;
     JSONArray rows = null;
 
-
-    public webConn (Activity cxt, String loc, String type){
+    public webConn (Activity cxt,String loc, String type){
         // Hashmap for ListView
         dataList = new ArrayList<HashMap<String, String>>();
+        //locRec =(mSharedPreference.getString("City", "Toronto"));
         locRec = loc;
         context = cxt;
         dataType = type;
@@ -97,15 +97,11 @@ import java.util.List;
             }else {
                 params.add(new BasicNameValuePair("city", locRec));
             }
-
             // getting product details by making HTTP request
             // Note that data details url will use GET request
             // getting JSON string from URL
-
             String[] tempList = new String[14];
-
             if (dataType.equals("currently")){
-
                 url_temp = url_all_data;
                 tempList = currentList;
                 numOfData = 1;
@@ -116,12 +112,9 @@ import java.util.List;
                 numOfData = 8;
             }
                 JSONObject json = jParser.makeHttpRequest(url_temp, "GET", params);
-
-
             // Check your log cat for JSON reponse
 
             Log.d("All DATA: ", json.toString());
-
             try {
                 // Checking for SUCCESS TAG
                 int success = json.getInt(TAG_SUCCESS);
@@ -130,26 +123,17 @@ import java.util.List;
                     // data found
                     // Getting Array of data
                     data = json.getJSONArray(TAG_DATA);
-
-
                     // looping through All data
                     for (int i = 0; i < numOfData; i++) {
-
                         JSONObject c = data.getJSONObject(i);
-
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<String, String>();
-
                         // adding each child node to HashMap key => value
-
                         for( int x=0; x<tempList.length;x++){
                             map.put(tempList[x], c.optString(tempList[x]));
                         }
-
                         // adding HashList to ArrayList
                         dataList.add(map);
-
-
                     }
                 } else {
                     // no data found
@@ -157,14 +141,9 @@ import java.util.List;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
             SystemClock.sleep(2000);
             return null;
         }
-
-
-
         /**
          * After completing background task Dismiss the progress dialog
          * **/

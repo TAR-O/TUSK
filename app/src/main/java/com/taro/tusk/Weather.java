@@ -1,12 +1,12 @@
 package com.taro.tusk;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.TabLayout;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import com.taro.tusk.Tools.WeatherFragmentPagerAdapter;
 import com.taro.tusk.Tools.setLocation;
 import android.support.v7.app.ActionBarActivity;
@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBarActivity;
 public class Weather extends ActionBarActivity {
 
     private Menu mymenu;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +45,11 @@ public class Weather extends ActionBarActivity {
         return true;
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-
-
        switch (item.getItemId()) {
             case R.id.action_refresh:
                 finish();
@@ -60,13 +57,23 @@ public class Weather extends ActionBarActivity {
                 return true;
             case R.id.action_setLocation:
                 Intent intent2 = new Intent(this, setLocation.class);
-                startActivity(intent2);
-                //startActivityForResult(intent2, 1);
+                startActivityForResult(intent2, 1);
                 return true;
-
-
         }
-
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                finish();
+                startActivity(getIntent());
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }
+
 }
